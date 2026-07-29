@@ -403,28 +403,40 @@ function submitOrder() {
   const price = Number(document.getElementById('ord-price').value);
   const desc  = document.getElementById('ord-desc').value.trim();
 
-  // Format date for display: DD.MM в HH:MM
   const [y,m,d] = date.split('-');
   const dtDisplay = `${d}.${m} в ${time}`;
 
   const order = {
-    id: Math.floor(100000 + Math.random() * 900000),
-    status: 'open',
+    action: 'create_order',
     title: desc.slice(0, 50) || 'Заказ грузчиков',
-    name, city, addr,
-    date, time,
-    dtDisplay,
+    description: desc,
+    address: city + ', ' + addr,
+    date: dtDisplay,
+    payment: price,
     workers: state.workers,
-    payMode,
-    price,
-    created: new Date().toISOString()
+    pay_mode: payMode,
+    is_permanent: 0
   };
 
-  state.myOrders.unshift(order);
-  state.profile.ordersClient++;
-  showToast('Заказ #' + order.id + ' создан!', 'Исполнители увидят его в бирже');
-  goTab('status');
-  renderMyOrders();
+  // Если открыто в Telegram — отправляем данные боту
+  if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initData) {
+    Telegram.WebApp.sendData(JSON.stringify(order));
+  } else {
+    // Режим браузера — показываем превью
+    const id = Math.floor(100000 + Math.random() * 900000);
+    state.myOrders.unshift({
+      id, status: 'open',
+      title: order.title,
+      addr: order.address,
+      dt: dtDisplay,
+      pay: new Intl.NumberFormat('ru-RU').format(price) + ' ₽',
+      w: state.workers, price
+    });
+    state.profile.ordersClient++;
+    showToast('Заказ создан (демо)!', 'В Telegram отправится боту');
+    goTab('status');
+    renderMyOrders();
+  }
 }
 
 // ===== WORKER SCREEN =====
