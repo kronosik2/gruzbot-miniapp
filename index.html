@@ -9,62 +9,58 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0;}
 body{background:#16161A;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#F4F4F7;min-height:100vh;}
 ::placeholder{color:#5A5A64;}
-input,textarea,button,select{font-family:inherit;outline:none;}
+input,textarea,button{font-family:inherit;outline:none;}
 
 .screen{display:none;padding:16px 16px 90px;}
 .screen.active{display:block;}
 
-/* NAV */
 .nav{position:fixed;bottom:0;left:0;right:0;background:#1E1E24;border-top:1px solid #2A2A32;display:flex;padding-bottom:env(safe-area-inset-bottom,0);z-index:100;}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 8px;border:0;background:transparent;color:#5A5A64;cursor:pointer;font-size:9px;font-weight:700;letter-spacing:.04em;transition:.15s;}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 8px;border:0;background:transparent;color:#5A5A64;cursor:pointer;font-size:9px;font-weight:700;letter-spacing:.04em;}
 .nb.active{color:#FFC107;}
 .nb svg{width:22px;height:22px;}
 
-/* CARDS & INPUTS */
-.card{background:#1E1E24;border-radius:16px;border:1px solid #2A2A32;padding:14px;margin-bottom:12px;}
 .lbl{display:block;font-size:10px;font-weight:700;color:#6A6A72;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
-.inp{width:100%;background:#121216;border:1px solid #2A2A32;border-radius:12px;padding:12px 14px;font-size:14px;font-weight:600;color:#F4F4F7;transition:.15s;}
+.inp{width:100%;background:#121216;border:1.5px solid #2A2A32;border-radius:12px;padding:12px 14px;font-size:14px;font-weight:600;color:#F4F4F7;transition:.15s;}
 .inp:focus{border-color:#FFC107;box-shadow:0 0 0 3px rgba(255,193,7,.1);}
-.inp.err{border-color:#EF4444;}
-.em{display:none;font-size:10px;color:#EF4444;margin-top:4px;}
+.inp.err{border-color:#EF4444;box-shadow:0 0 0 3px rgba(239,68,68,.1);}
+.em{display:none;font-size:11px;color:#EF4444;margin-top:5px;font-weight:600;}
 .em.show{display:block;}
-.field{margin-bottom:12px;}
+.field{margin-bottom:14px;}
 
-/* BUTTONS */
-.btn-gold{width:100%;border:0;border-radius:14px;padding:16px;background:linear-gradient(135deg,#FFC831,#FFB000);color:#16161A;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s;box-shadow:0 6px 20px rgba(255,184,0,.25);}
-.btn-gold:active{transform:scale(.98);opacity:.9;}
+.btn-gold{width:100%;border:0;border-radius:14px;padding:17px;background:linear-gradient(135deg,#FFC831,#FFB000);color:#16161A;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 20px rgba(255,184,0,.3);}
+.btn-gold:active{transform:scale(.98);}
 
-/* STEPPER */
-.stepper{display:flex;align-items:center;background:#121216;border:1px solid #2A2A32;border-radius:12px;overflow:hidden;}
-.sbtn{width:48px;height:50px;border:0;background:transparent;color:#F4F4F7;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;}
+.stepper{display:flex;align-items:center;background:#121216;border:1.5px solid #2A2A32;border-radius:12px;overflow:hidden;}
+.sbtn{width:50px;height:50px;border:0;background:transparent;color:#F4F4F7;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 .sbtn:active{background:#2A2A32;}
 .sval{flex:1;text-align:center;font-size:22px;font-weight:800;}
 
-/* PAY TABS */
-.ptabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;background:#121216;border-radius:12px;padding:4px;border:1px solid #2A2A32;}
-.ptab{border:0;border-radius:9px;padding:11px;font-size:12px;font-weight:700;cursor:pointer;color:#5A5A64;background:transparent;transition:.15s;}
-.ptab.active{background:#1E1E24;color:#F4F4F7;box-shadow:0 1px 6px rgba(0,0,0,.3);}
+/* СЕГМЕНТ ПЕРЕКЛЮЧАТЕЛЬ */
+.seg{display:grid;gap:5px;background:#121216;border-radius:12px;padding:4px;border:1.5px solid #2A2A32;}
+.seg-2{grid-template-columns:1fr 1fr;}
+.seg-3{grid-template-columns:1fr 1fr 1fr;}
+.seg-btn{border:0;border-radius:9px;padding:11px 8px;font-size:12px;font-weight:700;cursor:pointer;color:#5A5A64;background:transparent;transition:.15s;text-align:center;}
+.seg-btn.active{background:#1E1E24;color:#F4F4F7;box-shadow:0 1px 6px rgba(0,0,0,.4);}
 
-/* ORDER CARDS */
+/* PRICE HINT */
+.price-hint{background:#1A1600;border:1px solid #3A2E00;border-radius:10px;padding:10px 12px;margin-top:8px;font-size:11px;color:#B58A14;}
+
 .ocard{background:#1E1E24;border:1px solid #2A2A32;border-radius:14px;padding:13px;margin-bottom:10px;position:relative;overflow:hidden;}
 .ocard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#FFC107;}
-.badge{display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:700;}
+.badge{display:inline-flex;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:700;}
 .b-open{background:#1A2E1A;color:#4ADE80;border:1px solid #1F4A1F;}
 .b-prog{background:#1A1E2E;color:#60A5FA;border:1px solid #1F2A4A;}
 .b-done{background:#2A2200;color:#FFC107;border:1px solid #3A2E00;}
 
-/* WALLET */
 .wallet{background:linear-gradient(135deg,#2A2200,#1A1600);border:1px solid #3A2E00;border-radius:16px;padding:18px;margin-bottom:12px;}
 .sbox{background:#121216;border-radius:12px;padding:12px;border:1px solid #2A2A32;text-align:center;}
-
-/* AVATAR */
 .avatar{width:60px;height:60px;border-radius:18px;background:#2A2200;border:2px solid #3A2E00;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#FFC107;flex:0 0 auto;}
 
-/* TOAST */
-.toast{position:fixed;left:12px;right:12px;bottom:80px;background:#1E1E24;border:1px solid #2A2A32;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;transform:translateY(200%);transition:.28s cubic-bezier(.2,.8,.2,1);z-index:200;box-shadow:0 6px 20px rgba(0,0,0,.4);}
-.toast.show{transform:translateY(0);}
+h2{font-size:20px;font-weight:800;letter-spacing:-.025em;margin-bottom:16px;}
 
-h2{font-size:20px;font-weight:800;letter-spacing:-.025em;margin-bottom:14px;}
+.toast{position:fixed;left:12px;right:12px;bottom:80px;background:#222228;border:1px solid #2A2A32;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px;transform:translateY(200%);transition:.28s cubic-bezier(.2,.8,.2,1);z-index:200;box-shadow:0 6px 20px rgba(0,0,0,.5);}
+.toast.show{transform:translateY(0);}
+.toast-err{border-color:#4A1A1A;background:#1E1212;}
 
 input[type=date]::-webkit-calendar-picker-indicator,
 input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.4);}
@@ -78,65 +74,89 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.4);}
 
   <div class="field">
     <label class="lbl">Адрес объекта</label>
-    <input id="f-addr" class="inp" placeholder="ул. Ленина, д. 1">
-    <div class="em" id="e-addr">Укажите адрес</div>
+    <input id="f-addr" class="inp" placeholder="ул. Ленина, д. 1, кв. 5">
+    <div class="em" id="e-addr">⚠ Укажите адрес (минимум 5 символов)</div>
   </div>
 
   <div class="field" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
     <div>
       <label class="lbl">Дата</label>
       <input id="f-date" class="inp" type="date">
-      <div class="em" id="e-date">Укажите дату</div>
+      <div class="em" id="e-date">⚠ Укажите дату</div>
     </div>
     <div>
       <label class="lbl">Время</label>
       <input id="f-time" class="inp" type="time">
-      <div class="em" id="e-time">Укажите время</div>
+      <div class="em" id="e-time">⚠ Укажите время</div>
     </div>
   </div>
 
   <div class="field">
-    <label class="lbl">Грузчики</label>
+    <label class="lbl">Количество грузчиков</label>
     <div class="stepper">
       <button class="sbtn" onclick="cw(-1)">−</button>
       <span class="sval" id="wv">1</span>
-      <span style="font-size:12px;color:#6A6A72;padding-right:4px;">чел.</span>
+      <span style="font-size:12px;color:#6A6A72;padding-right:6px;">чел.</span>
       <button class="sbtn" onclick="cw(1)">+</button>
     </div>
   </div>
 
+  <!-- ТИП ОПЛАТЫ -->
   <div class="field">
-    <label class="lbl">Ваша цена за работу</label>
+    <label class="lbl">Тип оплаты</label>
+    <div class="seg seg-2" id="pay-type-seg">
+      <button class="seg-btn active" onclick="setPayType('hourly')">⏱ Почасовая</button>
+      <button class="seg-btn" onclick="setPayType('fixed')">💰 Сдельная</button>
+    </div>
+  </div>
+
+  <!-- ПОЧАСОВАЯ -->
+  <div id="block-hourly" class="field">
+    <label class="lbl">Ставка в час (₽)</label>
+    <div style="position:relative;">
+      <input id="f-rate" class="inp" type="number" inputmode="numeric" placeholder="500" style="padding-right:52px;">
+      <span style="position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:#FFC107;pointer-events:none;">₽/час</span>
+    </div>
+    <div class="em" id="e-rate">⚠ Укажите ставку (минимум 100 ₽/час)</div>
+    <div class="price-hint" id="price-hint-hourly">
+      Минимум 2 часа — итого от <b id="min-total">—</b> ₽
+    </div>
+  </div>
+
+  <!-- СДЕЛЬНАЯ -->
+  <div id="block-fixed" class="field" style="display:none;">
+    <label class="lbl">Сумма за всю работу (₽)</label>
     <div style="position:relative;">
       <input id="f-price" class="inp" type="number" inputmode="numeric" placeholder="3000" style="padding-right:38px;">
       <span style="position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:15px;font-weight:800;color:#FFC107;pointer-events:none;">₽</span>
     </div>
-    <div class="em" id="e-price">Минимум 100 ₽</div>
+    <div class="em" id="e-price">⚠ Укажите сумму (минимум 100 ₽)</div>
   </div>
 
   <div class="field">
-    <label class="lbl">Описание работы</label>
-    <textarea id="f-desc" class="inp" rows="3" placeholder="Что нужно сделать, объём, этаж…" style="resize:none;line-height:1.5;"></textarea>
-    <div class="em" id="e-desc">Опишите работу</div>
+    <label class="lbl">Описание <span style="color:#4A4A54;font-weight:400;text-transform:none;">(необязательно)</span></label>
+    <textarea id="f-desc" class="inp" rows="3" placeholder="Что нужно сделать, этаж, лифт, объём…" style="resize:none;line-height:1.5;"></textarea>
   </div>
 
+  <!-- ТИП НАЙМА -->
   <div class="field">
     <label class="lbl">Тип найма</label>
-    <div class="ptabs">
-      <button class="ptab active" id="pt-once" onclick="setType(0)">📦 Разовый</button>
-      <button class="ptab" id="pt-perm" onclick="setType(1)">🔁 Постоянный</button>
+    <div class="seg seg-2" id="hire-seg">
+      <button class="seg-btn active" onclick="setHire(0)">📦 Разовый</button>
+      <button class="seg-btn" onclick="setHire(1)">🔁 Постоянный</button>
     </div>
   </div>
 
+  <!-- СПОСОБ ОПЛАТЫ -->
   <div class="field">
-    <label class="lbl">Оплата</label>
-    <div class="ptabs">
-      <button class="ptab active" id="pp-cash" onclick="setPay('cash')">✓ Наличными</button>
-      <button class="ptab" id="pp-link" onclick="setPay('link')">По ссылке</button>
+    <label class="lbl">Способ оплаты</label>
+    <div class="seg seg-2" id="pay-method-seg">
+      <button class="seg-btn active" onclick="setMethod('cash')">💵 Наличными</button>
+      <button class="seg-btn" onclick="setMethod('transfer')">📲 Переводом</button>
     </div>
   </div>
 
-  <button class="btn-gold" id="submit-btn" onclick="submitOrder()">
+  <button class="btn-gold" onclick="submitOrder()">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M13.5 2 5 13.2h5.2L9.3 22 19 10.2h-5.4z"/></svg>
     Опубликовать заказ
   </button>
@@ -154,30 +174,26 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.4);}
     <div class="avatar" id="av">?</div>
     <div>
       <div style="font-size:18px;font-weight:800;" id="pname">—</div>
-      <div style="font-size:12px;color:#6A6A72;" id="pphone">—</div>
+      <div style="font-size:12px;color:#6A6A72;margin-top:2px;" id="pphone">—</div>
     </div>
   </div>
-
   <div class="wallet">
     <div style="font-size:10px;font-weight:700;color:#B58A14;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;">Кошелёк</div>
     <div style="font-size:32px;font-weight:800;color:#FFC107;" id="pbal">0 ₽</div>
     <div style="font-size:11px;color:#7A6A32;margin-top:3px;">Для оплаты публикаций и смен</div>
   </div>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
     <div class="sbox">
-      <div style="font-size:11px;color:#6A6A72;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em;">Как заказчик</div>
-      <div style="font-size:20px;font-weight:800;" id="prc">0</div>
-      <div style="font-size:11px;color:#FFC107;margin-top:2px;" id="prc-r">⭐ 5.0</div>
+      <div style="font-size:10px;color:#6A6A72;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em;">Как заказчик</div>
+      <div style="font-size:22px;font-weight:800;" id="prc">0</div>
+      <div style="font-size:12px;color:#FFC107;margin-top:3px;" id="prc-r">⭐ 5.0</div>
     </div>
     <div class="sbox">
-      <div style="font-size:11px;color:#6A6A72;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em;">Как исполнитель</div>
-      <div style="font-size:20px;font-weight:800;" id="prw">0</div>
-      <div style="font-size:11px;color:#FFC107;margin-top:2px;" id="prw-r">⭐ 5.0</div>
+      <div style="font-size:10px;color:#6A6A72;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em;">Как исполнитель</div>
+      <div style="font-size:22px;font-weight:800;" id="prw">0</div>
+      <div style="font-size:12px;color:#FFC107;margin-top:3px;" id="prw-r">⭐ 5.0</div>
     </div>
   </div>
-
-  <div id="txlist" class="card" style="font-size:12px;color:#5A5A64;">История пуста</div>
 </div>
 
 <!-- NAV -->
@@ -198,24 +214,25 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.4);}
 
 <!-- TOAST -->
 <div class="toast" id="toast">
-  <div style="width:28px;height:28px;border-radius:9px;background:#1FBF61;display:grid;place-items:center;flex:0 0 auto;">
+  <div id="toast-icon" style="width:28px;height:28px;border-radius:9px;background:#1FBF61;display:grid;place-items:center;flex:0 0 auto;">
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>
   </div>
   <div>
-    <strong style="display:block;font-size:12px;" id="tt">—</strong>
-    <span style="font-size:10px;color:#9A9AA6;" id="tm">—</span>
+    <strong style="display:block;font-size:13px;" id="tt">—</strong>
+    <span style="font-size:11px;color:#9A9AA6;" id="tm">—</span>
   </div>
 </div>
 
 <script>
-// ── STATE ──────────────────────────────────────────
-let workers = 1;
-let isPerm  = 0;
-let payMode = 'cash';
-let profile = { name:'', phone:'', balance:0, oc:0, ow:0, rc:5.0, rw:5.0 };
+// ── STATE ──
+let workers  = 1;
+let isPerm   = 0;
+let payType  = 'hourly';   // 'hourly' | 'fixed'
+let payMethod= 'cash';
+let profile  = { name:'', phone:'', balance:0, oc:0, ow:0, rc:5.0, rw:5.0 };
 let myOrders = [];
 
-// ── INIT ───────────────────────────────────────────
+// ── INIT ──
 window.addEventListener('DOMContentLoaded', () => {
   const tg = window.Telegram?.WebApp;
   if (tg) {
@@ -223,24 +240,24 @@ window.addEventListener('DOMContentLoaded', () => {
     tg.expand();
     const u = tg.initDataUnsafe?.user;
     if (u) {
-      profile.name  = (u.first_name || '') + (u.last_name ? ' ' + u.last_name : '');
+      profile.name  = [u.first_name, u.last_name].filter(Boolean).join(' ');
       profile.phone = u.username ? '@' + u.username : '';
     }
   }
 
-  // defaults
-  const now  = new Date();
-  const tom  = new Date(now.getTime() + 86400000);
-  const pad  = v => String(v).padStart(2,'0');
+  const now = new Date(), tom = new Date(now.getTime() + 86400000);
+  const pad = v => String(v).padStart(2,'0');
   document.getElementById('f-date').value = `${tom.getFullYear()}-${pad(tom.getMonth()+1)}-${pad(tom.getDate())}`;
   document.getElementById('f-date').min   = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
   document.getElementById('f-time').value = '09:00';
+
+  document.getElementById('f-rate').addEventListener('input', updateHint);
 
   renderProfile();
   renderMOL();
 });
 
-// ── NAV ────────────────────────────────────────────
+// ── NAV ──
 function gt(t) {
   ['order','status','profile'].forEach(x => {
     document.getElementById('s-'+x).classList.toggle('active', x===t);
@@ -248,101 +265,169 @@ function gt(t) {
   });
 }
 
-// ── FORM CONTROLS ──────────────────────────────────
+// ── CONTROLS ──
 function cw(d) {
   workers = Math.max(1, Math.min(20, workers+d));
   document.getElementById('wv').textContent = workers;
+  updateHint();
 }
 
-function setType(v) {
+function setPayType(t) {
+  payType = t;
+  document.getElementById('block-hourly').style.display = t==='hourly' ? '' : 'none';
+  document.getElementById('block-fixed').style.display  = t==='fixed'  ? '' : 'none';
+  setActive('pay-type-seg', t==='hourly' ? 0 : 1);
+}
+
+function setHire(v) {
   isPerm = v;
-  document.getElementById('pt-once').className = 'ptab' + (v===0?' active':'');
-  document.getElementById('pt-perm').className = 'ptab' + (v===1?' active':'');
+  setActive('hire-seg', v);
 }
 
-function setPay(m) {
-  payMode = m;
-  document.getElementById('pp-cash').className = 'ptab' + (m==='cash'?' active':'');
-  document.getElementById('pp-link').className = 'ptab' + (m==='link'?' active':'');
-  document.getElementById('pp-cash').textContent = m==='cash' ? '✓ Наличными' : 'Наличными';
-  document.getElementById('pp-link').textContent = m==='link' ? '✓ По ссылке' : 'По ссылке';
+function setMethod(m) {
+  payMethod = m;
+  setActive('pay-method-seg', m==='cash' ? 0 : 1);
 }
 
-// ── VALIDATE ───────────────────────────────────────
+function setActive(segId, idx) {
+  const btns = document.getElementById(segId).querySelectorAll('.seg-btn');
+  btns.forEach((b,i) => b.classList.toggle('active', i===idx));
+}
+
+function updateHint() {
+  const rate = Number(document.getElementById('f-rate').value);
+  const el   = document.getElementById('min-total');
+  if (rate >= 100) {
+    el.textContent = fmt(rate * 2 * workers);
+  } else {
+    el.textContent = '—';
+  }
+}
+
+// ── VALIDATE ──
 function validate() {
   let ok = true;
-  const rules = [
-    ['f-addr',  'e-addr',  v => v.trim().length >= 5],
-    ['f-date',  'e-date',  v => !!v],
-    ['f-time',  'e-time',  v => !!v],
-    ['f-price', 'e-price', v => Number(v) >= 100],
-    ['f-desc',  'e-desc',  v => v.trim().length >= 10],
-  ];
-  rules.forEach(([id, eid, fn]) => {
-    const el  = document.getElementById(id);
-    const val = fn(el.value);
-    el.classList.toggle('err', !val);
-    document.getElementById(eid).classList.toggle('show', !val);
-    if (!val) ok = false;
-  });
+
+  // адрес
+  const addr = document.getElementById('f-addr');
+  const addrOk = addr.value.trim().length >= 5;
+  addr.classList.toggle('err', !addrOk);
+  document.getElementById('e-addr').classList.toggle('show', !addrOk);
+  if (!addrOk) ok = false;
+
+  // дата
+  const date = document.getElementById('f-date');
+  const dateOk = !!date.value;
+  date.classList.toggle('err', !dateOk);
+  document.getElementById('e-date').classList.toggle('show', !dateOk);
+  if (!dateOk) ok = false;
+
+  // время
+  const time = document.getElementById('f-time');
+  const timeOk = !!time.value;
+  time.classList.toggle('err', !timeOk);
+  document.getElementById('e-time').classList.toggle('show', !timeOk);
+  if (!timeOk) ok = false;
+
+  // цена в зависимости от типа
+  if (payType === 'hourly') {
+    const rate = document.getElementById('f-rate');
+    const rateOk = Number(rate.value) >= 100;
+    rate.classList.toggle('err', !rateOk);
+    document.getElementById('e-rate').classList.toggle('show', !rateOk);
+    if (!rateOk) ok = false;
+  } else {
+    const price = document.getElementById('f-price');
+    const priceOk = Number(price.value) >= 100;
+    price.classList.toggle('err', !priceOk);
+    document.getElementById('e-price').classList.toggle('show', !priceOk);
+    if (!priceOk) ok = false;
+  }
+
   return ok;
 }
 
-// ── SUBMIT ─────────────────────────────────────────
+// ── SUBMIT ──
 function submitOrder() {
+  // Сначала сброс ошибок
+  ['f-addr','f-date','f-time','f-rate','f-price'].forEach(id => {
+    document.getElementById(id).classList.remove('err');
+  });
+  ['e-addr','e-date','e-time','e-rate','e-price'].forEach(id => {
+    document.getElementById(id).classList.remove('show');
+  });
+
   if (!validate()) {
-    toast('Заполни все поля', 'Проверь выделенные красным');
+    toast('Проверь форму', 'Заполни поля отмеченные красным', true);
     return;
   }
 
-  const addr  = document.getElementById('f-addr').value.trim();
-  const date  = document.getElementById('f-date').value;
-  const time  = document.getElementById('f-time').value;
-  const price = Number(document.getElementById('f-price').value);
-  const desc  = document.getElementById('f-desc').value.trim();
+  const addr = document.getElementById('f-addr').value.trim();
+  const date = document.getElementById('f-date').value;
+  const time = document.getElementById('f-time').value;
+  const desc = document.getElementById('f-desc').value.trim();
   const [y,m,d] = date.split('-');
   const dtStr = `${d}.${m} в ${time}`;
 
+  let payment, paymentLabel;
+  if (payType === 'hourly') {
+    const rate = Number(document.getElementById('f-rate').value);
+    payment = rate;
+    paymentLabel = `${fmt(rate)} ₽/час (мин. 2ч × ${workers} чел. = ${fmt(rate*2*workers)} ₽)`;
+  } else {
+    payment = Number(document.getElementById('f-price').value);
+    paymentLabel = `${fmt(payment)} ₽ за всю работу`;
+  }
+
   const order = {
     action:       'create_order',
-    title:        desc.slice(0, 50),
-    description:  desc,
+    title:        desc.slice(0,50) || `Грузчики ${workers} чел. — ${dtStr}`,
+    description:  desc || `Грузчики: ${workers} чел. Оплата: ${paymentLabel}`,
     address:      addr,
     date:         dtStr,
-    payment:      price,
+    payment:      payment,
+    pay_type:     payType,
     workers:      workers,
     is_permanent: isPerm,
-    pay_mode:     payMode,
+    pay_mode:     payMethod,
   };
 
   const tg = window.Telegram?.WebApp;
   if (tg && tg.initData) {
-    // Отправляем боту и закрываем
     tg.sendData(JSON.stringify(order));
   } else {
-    // Демо-режим в браузере
-    const id = Math.floor(100000 + Math.random()*900000);
-    myOrders.unshift({ id, title: order.title, addr, dt: dtStr, pay: fmt(price), status:'open' });
+    // Демо в браузере
+    myOrders.unshift({
+      id: Math.floor(100000+Math.random()*900000),
+      title: order.title,
+      addr, dt: dtStr,
+      pay: payType==='hourly' ? fmt(payment)+' ₽/час' : fmt(payment)+' ₽',
+      status:'open'
+    });
     toast('Заказ создан (демо)!', 'В Telegram данные уйдут боту');
     renderMOL();
     gt('status');
   }
 }
 
-// ── MY ORDERS ──────────────────────────────────────
+// ── MY ORDERS ──
 function renderMOL() {
   const el = document.getElementById('mol');
   if (!myOrders.length) {
-    el.innerHTML = '<div style="text-align:center;padding:40px 0;color:#5A5A64;font-size:13px;">Нет заказов — создайте во вкладке «Заказ»</div>';
+    el.innerHTML = '<div style="text-align:center;padding:40px 0;color:#5A5A64;font-size:13px;">Нет заказов<br><span style="color:#3A3A44;font-size:11px;">Создайте во вкладке «Заказ»</span></div>';
     return;
   }
-  const sc = { open:'<span class="badge b-open">Открыт</span>', in_progress:'<span class="badge b-prog">В работе</span>', done:'<span class="badge b-done">Выполнен</span>' };
+  const sc = {
+    open:        '<span class="badge b-open">Открыт</span>',
+    in_progress: '<span class="badge b-prog">В работе</span>',
+    done:        '<span class="badge b-done">Выполнен</span>'
+  };
   el.innerHTML = myOrders.map(o => `
     <div class="ocard">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
-        <div>
+        <div style="flex:1;min-width:0;margin-right:8px;">
           <div style="font-size:10px;color:#5A5A64;margin-bottom:2px;">#${o.id}</div>
-          <div style="font-size:14px;font-weight:700;">${o.title}</div>
+          <div style="font-size:14px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${o.title}</div>
         </div>
         ${sc[o.status]||sc.open}
       </div>
@@ -355,7 +440,7 @@ function renderMOL() {
   `).join('');
 }
 
-// ── PROFILE ────────────────────────────────────────
+// ── PROFILE ──
 function renderProfile() {
   document.getElementById('pname').textContent  = profile.name  || 'Пользователь';
   document.getElementById('pphone').textContent = profile.phone || 'Телефон из бота';
@@ -367,17 +452,20 @@ function renderProfile() {
   document.getElementById('prw-r').textContent  = '⭐ ' + profile.rw.toFixed(1);
 }
 
-// ── UTILS ──────────────────────────────────────────
+// ── UTILS ──
 function fmt(n) { return new Intl.NumberFormat('ru-RU').format(n); }
 
 let _tt;
-function toast(t, m) {
+function toast(t, m, isErr=false) {
   document.getElementById('tt').textContent = t;
   document.getElementById('tm').textContent = m;
-  const el = document.getElementById('toast');
+  const el   = document.getElementById('toast');
+  const icon = document.getElementById('toast-icon');
+  el.classList.toggle('toast-err', isErr);
+  icon.style.background = isErr ? '#BF3A1F' : '#1FBF61';
   el.classList.add('show');
   clearTimeout(_tt);
-  _tt = setTimeout(() => el.classList.remove('show'), 2500);
+  _tt = setTimeout(() => el.classList.remove('show'), 3000);
 }
 </script>
 </body>
