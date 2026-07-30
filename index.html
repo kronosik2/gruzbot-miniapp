@@ -250,6 +250,11 @@ window.addEventListener('DOMContentLoaded', function() {
 
   renderProfile();
   renderMOL();
+
+  // Загружаем реальные данные из БД
+  if (CURRENT_USER_ID > 0) {
+    loadData();
+  }
 });
 
 function gt(t) {
@@ -380,7 +385,54 @@ function submitOrder() {
   }
 }
 
-// ── ОТПРАВКА БОТУ через ngrok ──
+// ── ЗАГРУЗКА ДАННЫХ ИЗ БД ──
+var BASE_URL = 'https://quarters-semisweet-cut.ngrok-free.dev';
+
+function loadData() {
+  var h = {'ngrok-skip-browser-warning': '1'};
+
+  // Профиль
+  fetch(BASE_URL + '/profile?user_id=' + CURRENT_USER_ID, {headers: h})
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if (!d.ok) return;
+    profile.name    = d.name;
+    profile.phone   = d.phone;
+    profile.balance = d.balance;
+    profile.oc      = d.orders_as_client;
+    profile.ow      = d.orders_as_worker;
+    profile.rc      = d.rating_client;
+    profile.rw      = d.rating_worker;
+    onShift         = d.on_shift;
+    renderProfile();
+    renderShift();
+    // Показываем тост если на смене
+    if (onShift) toast('Ты на смене сегодня! 💪', 'До 00:00');
+  })
+  .catch(function(){});
+
+  // Мои заказы
+  fetch(BASE_URL + '/orders?user_id=' + CURRENT_USER_ID, {headers: h})
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if (!d.ok) return;
+    myOrders = d.orders.map(function(o){
+      var payLabel = o.payment + (o.pay_type === 'hourly' ? ' ₽/час' : ' ₽');
+      return {
+        id: o.id,
+        title: o.title,
+        addr: o.address,
+        dt: o.date,
+        pay: fmt(o.payment) + ' ₽',
+        status: o.status
+      };
+    });
+    renderMOL();
+  })
+  .catch(function(){});
+}
+
+
 var API_URL = 'https://quarters-semisweet-cut.ngrok-free.dev/miniapp';
 
 function sendToBotOrDemo(data, demoCallback, successMsg) {
@@ -398,7 +450,8 @@ function sendToBotOrDemo(data, demoCallback, successMsg) {
     .then(function(r){ return r.json(); })
     .then(function(r){
       if (r && r.ok) {
-        if (successMsg) toast(successMsg, 'Ответ придёт в Telegram');
+        if (successMsg) toast(successMsg, 'Данные обновлены');
+        setTimeout(loadData, 1000);
       } else {
         toast('Ошибка: '+(r.error||'неизвестно'), '', true);
         if (demoCallback) demoCallback();
