@@ -10,55 +10,72 @@
 body{background:#16161A;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#F4F4F7;min-height:100vh;}
 ::placeholder{color:#5A5A64;}
 input,textarea,button{font-family:inherit;outline:none;}
-.screen{display:none;padding:16px 16px 90px;overflow-y:auto;}
+
+.screen{display:none;padding:16px 16px 90px;}
 .screen.active{display:block;}
+
 .nav{position:fixed;bottom:0;left:0;right:0;background:#1E1E24;border-top:1px solid #2A2A32;display:flex;padding-bottom:env(safe-area-inset-bottom,0);z-index:100;}
 .nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 8px;border:0;background:transparent;color:#5A5A64;cursor:pointer;font-size:9px;font-weight:700;letter-spacing:.04em;}
 .nb.active{color:#FFC107;}
 .nb svg{width:22px;height:22px;}
+
 .lbl{display:block;font-size:10px;font-weight:700;color:#6A6A72;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
 .inp{width:100%;background:#121216;border:1.5px solid #2A2A32;border-radius:12px;padding:12px 14px;font-size:14px;font-weight:600;color:#F4F4F7;transition:.15s;}
 .inp:focus{border-color:#FFC107;box-shadow:0 0 0 3px rgba(255,193,7,.1);}
-.inp.err{border-color:#EF4444;box-shadow:0 0 0 3px rgba(239,68,68,.1);}
+.inp.err{border-color:#EF4444;}
 .em{display:none;font-size:11px;color:#EF4444;margin-top:5px;font-weight:600;}
 .em.show{display:block;}
 .field{margin-bottom:14px;}
-.btn-gold{width:100%;border:0;border-radius:14px;padding:17px;background:linear-gradient(135deg,#FFC831,#FFB000);color:#16161A;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 20px rgba(255,184,0,.3);}
+
+.btn-gold{width:100%;border:0;border-radius:14px;padding:16px;background:linear-gradient(135deg,#FFC831,#FFB000);color:#16161A;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 20px rgba(255,184,0,.3);}
 .btn-gold:active{transform:scale(.98);}
-.btn-dark{width:100%;border:1px solid #2A2A32;border-radius:14px;padding:15px;background:#1E1E24;color:#F4F4F7;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-dark{width:100%;border:1px solid #2A2A32;border-radius:12px;padding:13px;background:#1E1E24;color:#F4F4F7;font-size:13px;font-weight:700;cursor:pointer;}
 .btn-dark:active{background:#2A2A32;}
+.btn-green{width:100%;border:0;border-radius:12px;padding:13px;background:linear-gradient(135deg,#1FBF61,#159A4C);color:#fff;font-size:13px;font-weight:800;cursor:pointer;}
+.btn-red{width:100%;border:1px solid #4A1A1A;border-radius:12px;padding:13px;background:#1E1212;color:#EF4444;font-size:13px;font-weight:700;cursor:pointer;}
+
 .stepper{display:flex;align-items:center;background:#121216;border:1.5px solid #2A2A32;border-radius:12px;overflow:hidden;}
 .sbtn{width:50px;height:50px;border:0;background:transparent;color:#F4F4F7;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 .sbtn:active{background:#2A2A32;}
 .sval{flex:1;text-align:center;font-size:22px;font-weight:800;}
+
 .seg{display:grid;gap:5px;background:#121216;border-radius:12px;padding:4px;border:1.5px solid #2A2A32;}
 .seg2{grid-template-columns:1fr 1fr;}
-.seg-btn{border:0;border-radius:9px;padding:11px 8px;font-size:12px;font-weight:700;cursor:pointer;color:#5A5A64;background:transparent;transition:.15s;text-align:center;}
+.seg-btn{border:0;border-radius:9px;padding:11px 8px;font-size:12px;font-weight:700;cursor:pointer;color:#5A5A64;background:transparent;text-align:center;}
 .seg-btn.active{background:#1E1E24;color:#F4F4F7;box-shadow:0 1px 6px rgba(0,0,0,.4);}
-.price-hint{background:#1A1600;border:1px solid #3A2E00;border-radius:10px;padding:10px 12px;margin-top:8px;font-size:11px;color:#B58A14;line-height:1.5;}
+
 .card{background:#1E1E24;border:1px solid #2A2A32;border-radius:14px;padding:14px;margin-bottom:12px;}
 .ocard{background:#1E1E24;border:1px solid #2A2A32;border-radius:14px;padding:13px;margin-bottom:10px;position:relative;overflow:hidden;}
 .ocard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#FFC107;}
+
 .badge{display:inline-flex;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:700;}
 .b-open{background:#1A2E1A;color:#4ADE80;border:1px solid #1F4A1F;}
 .b-prog{background:#1A1E2E;color:#60A5FA;border:1px solid #1F2A4A;}
 .b-done{background:#2A2200;color:#FFC107;border:1px solid #3A2E00;}
+.b-pend{background:#1A1600;color:#9A8A14;border:1px solid #3A2E00;}
+.b-rej{background:#1E1212;color:#EF4444;border:1px solid #4A1A1A;}
+
 .wallet{background:linear-gradient(135deg,#2A2200,#1A1600);border:1px solid #3A2E00;border-radius:16px;padding:18px;margin-bottom:12px;}
 .sbox{background:#121216;border-radius:12px;padding:12px;border:1px solid #2A2A32;text-align:center;}
 .avatar{width:60px;height:60px;border-radius:18px;background:#2A2200;border:2px solid #3A2E00;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#FFC107;flex:0 0 auto;}
-.shift-on{background:linear-gradient(135deg,#1A2E1A,#0F1F0F);border:1px solid #1F4A1F;}
+
+.price-hint{background:#1A1600;border:1px solid #3A2E00;border-radius:10px;padding:10px 12px;margin-top:8px;font-size:11px;color:#B58A14;line-height:1.5;}
+
 h2{font-size:20px;font-weight:800;letter-spacing:-.025em;margin-bottom:16px;}
+.section-title{font-size:11px;font-weight:700;color:#5A5A64;text-transform:uppercase;letter-spacing:.06em;margin:0 0 10px;}
+
 .toast{position:fixed;left:12px;right:12px;bottom:80px;background:#222228;border:1px solid #2A2A32;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px;transform:translateY(200%);transition:.28s cubic-bezier(.2,.8,.2,1);z-index:200;box-shadow:0 6px 20px rgba(0,0,0,.5);}
 .toast.show{transform:translateY(0);}
+.loading{text-align:center;padding:30px;color:#5A5A64;font-size:13px;}
 input[type=date]::-webkit-calendar-picker-indicator,
 input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.4);}
 </style>
 </head>
 <body>
 
-<!-- ═══ ЗАКАЗ ═══ -->
+<!-- ═══ ЗАКАЗАТЬ (заказчик) ═══ -->
 <div id="s-order" class="screen active">
-  <h2>Новый заказ</h2>
+  <h2>📋 Новый заказ</h2>
   <div class="field">
     <label class="lbl">Адрес объекта</label>
     <input id="f-addr" class="inp" placeholder="ул. Ленина, д. 1">
@@ -127,35 +144,41 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.4);}
       <button class="seg-btn" onclick="setMethod('transfer')">📲 Переводом</button>
     </div>
   </div>
-  <button class="btn-gold" id="btn-submit" onclick="submitOrder()">
+  <button class="btn-gold" onclick="submitOrder()">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M13.5 2 5 13.2h5.2L9.3 22 19 10.2h-5.4z"/></svg>
-    <span id="btn-submit-text">Опубликовать — 50 ₽</span>
+    <span id="btn-publish-txt">Опубликовать — 50 ₽</span>
   </button>
 </div>
 
-<!-- ═══ СМЕНА ═══ -->
+<!-- ═══ МОИ ЗАКАЗЫ (заказчик) ═══ -->
+<div id="s-myorders" class="screen">
+  <h2>📂 Мои заказы</h2>
+  <div id="myorders-list"><div class="loading">Загрузка…</div></div>
+</div>
+
+<!-- ═══ СМЕНА (исполнитель) ═══ -->
 <div id="s-shift" class="screen">
-  <h2>Выход на смену</h2>
+  <h2>👷 Выход на смену</h2>
   <div class="card" id="shift-card">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
       <div>
-        <div style="font-size:15px;font-weight:700;" id="shift-title">Не на смене</div>
-        <div style="font-size:12px;color:#6A6A72;margin-top:3px;" id="shift-sub">Оплатите смену чтобы видеть заказы</div>
+        <div style="font-size:15px;font-weight:800;" id="shift-title">Не на смене</div>
+        <div style="font-size:12px;color:#6A6A72;margin-top:3px;" id="shift-sub">Оплатите чтобы видеть заказы</div>
       </div>
-      <div style="font-size:28px;" id="shift-emoji">😴</div>
+      <div style="font-size:30px;" id="shift-emoji">😴</div>
     </div>
     <button class="btn-gold" id="shift-btn" onclick="toggleShift()">🟢 Выйти на смену — 20 ₽</button>
   </div>
-  <div id="shift-orders" style="display:none;">
-    <div style="font-size:13px;font-weight:700;color:#6A6A72;margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em;">Доступные заказы</div>
-    <div id="orders-list"></div>
+  <div id="shift-orders-wrap" style="display:none;">
+    <div class="section-title">Доступные заказы</div>
+    <div id="shift-orders-list"><div class="loading">Загрузка…</div></div>
   </div>
 </div>
 
-<!-- ═══ МОИ ЗАКАЗЫ ═══ -->
-<div id="s-status" class="screen">
-  <h2>Мои заказы</h2>
-  <div id="mol"></div>
+<!-- ═══ МОИ ОТКЛИКИ (исполнитель) ═══ -->
+<div id="s-myresponses" class="screen">
+  <h2>📌 Мои отклики</h2>
+  <div id="myresponses-list"><div class="loading">Загрузка…</div></div>
 </div>
 
 <!-- ═══ ПРОФИЛЬ ═══ -->
@@ -173,18 +196,18 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.4);}
     <div style="font-size:11px;color:#7A6A32;margin-top:3px;">Для оплаты публикаций и смен</div>
     <div style="margin-top:12px;display:flex;gap:8px;align-items:center;">
       <input id="topup-amount" type="number" inputmode="numeric" placeholder="Сумма ₽" style="flex:1;background:#121216;border:1px solid #3A2E00;border-radius:10px;padding:10px 12px;font-size:14px;font-weight:700;color:#F4F4F7;">
-      <button onclick="topUp()" style="border:0;border-radius:10px;padding:10px 16px;background:linear-gradient(135deg,#FFC831,#FFB000);color:#16161A;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap;">+ Пополнить</button>
+      <button onclick="topUp()" style="border:0;border-radius:10px;padding:10px 16px;background:linear-gradient(135deg,#FFC831,#FFB000);color:#16161A;font-size:13px;font-weight:800;cursor:pointer;">+ Пополнить</button>
     </div>
-    <div style="font-size:10px;color:#5A5A64;margin-top:6px;">Демо-режим — реальных списаний нет</div>
+    <div style="font-size:10px;color:#5A5A64;margin-top:6px;">Демо-режим</div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
     <div class="sbox">
-      <div style="font-size:10px;color:#6A6A72;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em;">Как заказчик</div>
+      <div style="font-size:10px;color:#6A6A72;margin-bottom:5px;text-transform:uppercase;letter-spacing:.04em;">Как заказчик</div>
       <div style="font-size:22px;font-weight:800;" id="prc">0</div>
       <div style="font-size:12px;color:#FFC107;margin-top:3px;" id="prc-r">⭐ 5.0</div>
     </div>
     <div class="sbox">
-      <div style="font-size:10px;color:#6A6A72;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em;">Как исполнитель</div>
+      <div style="font-size:10px;color:#6A6A72;margin-bottom:5px;text-transform:uppercase;letter-spacing:.04em;">Как исполнитель</div>
       <div style="font-size:22px;font-weight:800;" id="prw">0</div>
       <div style="font-size:12px;color:#FFC107;margin-top:3px;" id="prw-r">⭐ 5.0</div>
     </div>
@@ -197,13 +220,17 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.4);}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13.5 2 5 13.2h5.2L9.3 22 19 10.2h-5.4z"/></svg>
     ЗАКАЗ
   </button>
+  <button class="nb" id="nb-myorders" onclick="gt('myorders')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+    МОИ
+  </button>
   <button class="nb" id="nb-shift" onclick="gt('shift')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="7" r="4"/><path d="M2 21v-1a7 7 0 0 1 14 0v1"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
     СМЕНА
   </button>
-  <button class="nb" id="nb-status" onclick="gt('status')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-    МОИ
+  <button class="nb" id="nb-myresponses" onclick="gt('myresponses')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    ОТКЛИКИ
   </button>
   <button class="nb" id="nb-profile" onclick="gt('profile')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6.4 8-6.4s8 2.4 8 6.4"/></svg>
@@ -219,14 +246,15 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.4);}
 </div>
 
 <script>
-var workers=1, isPerm=0, payType='hourly', payMethod='cash', onShift=false;
-var profile={name:'',phone:'',balance:0,oc:0,ow:0,rc:5.0,rw:5.0};
-var myOrders=[], openOrders=[], demoOrders=[
-  {id:101,title:'Переезд квартиры',addr:'ул. Гагарина, 12',dt:'Сегодня 14:00',pay:'500 ₽/час',w:2,rating_client:4.8,orders_as_client:5},
-  {id:102,title:'Погрузка коробок',addr:'пр. Победы, 45',dt:'Завтра 09:00',pay:'2 000 ₽',w:1,rating_client:5.0,orders_as_client:2},
-];
+// ── КОНФИГ ──
+var BASE_URL = 'https://quarters-semisweet-cut.ngrok-free.dev';
 var CURRENT_USER_ID = 0;
 
+// ── СТЕЙТ ──
+var workers=1, isPerm=0, payType='hourly', payMethod='cash', onShift=false;
+var profile={name:'',phone:'',balance:0,oc:0,ow:0,rc:5.0,rw:5.0};
+
+// ── ИНИТ ──
 window.addEventListener('DOMContentLoaded', function() {
   try {
     var tg = window.Telegram && window.Telegram.WebApp;
@@ -240,8 +268,9 @@ window.addEventListener('DOMContentLoaded', function() {
         profile.phone = u.username ? '@'+u.username : '';
       }
     }
-  } catch(e) { console.error('TG init error:', e); }
+  } catch(e) {}
 
+  // Дефолты формы
   var now=new Date(), tom=new Date(now.getTime()+86400000);
   var pad=function(v){return String(v).padStart(2,'0');};
   document.getElementById('f-date').value = tom.getFullYear()+'-'+pad(tom.getMonth()+1)+'-'+pad(tom.getDate());
@@ -249,422 +278,281 @@ window.addEventListener('DOMContentLoaded', function() {
   document.getElementById('f-time').value = '09:00';
 
   renderProfile();
-  renderMOL();
-
-  // Загружаем реальные данные из БД
-  if (CURRENT_USER_ID > 0) {
-    loadData();
-  }
+  if (CURRENT_USER_ID > 0) loadData();
 });
 
+// ── НАВИГАЦИЯ ──
 function gt(t) {
-  ['order','shift','status','profile'].forEach(function(x) {
+  ['order','myorders','shift','myresponses','profile'].forEach(function(x) {
     document.getElementById('s-'+x).classList.toggle('active', x===t);
     document.getElementById('nb-'+x).classList.toggle('active', x===t);
   });
+  if (t==='myorders') loadMyOrders();
+  if (t==='shift' && onShift) loadOpenOrders();
+  if (t==='myresponses') loadMyResponses();
 }
 
-function cw(d) {
-  workers = Math.max(1, Math.min(20, workers+d));
-  document.getElementById('wv').textContent = workers;
-  updateHint();
-}
-
-function setPayType(t) {
-  payType = t;
-  document.getElementById('block-hourly').style.display = t==='hourly' ? '' : 'none';
-  document.getElementById('block-fixed').style.display  = t==='fixed'  ? '' : 'none';
-  var btns = document.getElementById('seg-paytype').querySelectorAll('.seg-btn');
-  btns[0].classList.toggle('active', t==='hourly');
-  btns[1].classList.toggle('active', t==='fixed');
-}
-
-function setHire(v) {
-  isPerm = v;
-  var btns = document.getElementById('seg-hire').querySelectorAll('.seg-btn');
-  btns[0].classList.toggle('active', v===0);
-  btns[1].classList.toggle('active', v===1);
-  document.getElementById('btn-submit-text').textContent = v===1 ? 'Опубликовать — 100 ₽' : 'Опубликовать — 50 ₽';
-}
-
-function setMethod(m) {
-  payMethod = m;
-  var btns = document.getElementById('seg-method').querySelectorAll('.seg-btn');
-  btns[0].classList.toggle('active', m==='cash');
-  btns[1].classList.toggle('active', m==='transfer');
-}
-
-function updateHint() {
-  var rate = Number(document.getElementById('f-rate').value)||0;
-  document.getElementById('hint-total').textContent = rate>=100 ? fmt(rate*2*workers) : '—';
-}
-
-function submitOrder() {
-  try {
-    // Сброс ошибок
-    ['f-addr','f-date','f-time','f-rate','f-price'].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) el.classList.remove('err');
-    });
-    ['e-addr','e-date','e-time','e-rate','e-price'].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) el.classList.remove('show');
-    });
-
-    var ok = true;
-    var addr = document.getElementById('f-addr').value.trim();
-    if (addr.length < 3) {
-      document.getElementById('f-addr').classList.add('err');
-      document.getElementById('e-addr').classList.add('show');
-      ok = false;
-    }
-    var dateVal = document.getElementById('f-date').value;
-    if (!dateVal) {
-      document.getElementById('f-date').classList.add('err');
-      document.getElementById('e-date').classList.add('show');
-      ok = false;
-    }
-    var timeVal = document.getElementById('f-time').value;
-    if (!timeVal) {
-      document.getElementById('f-time').classList.add('err');
-      document.getElementById('e-time').classList.add('show');
-      ok = false;
-    }
-
-    var payment = 0;
-    if (payType === 'hourly') {
-      payment = Number(document.getElementById('f-rate').value)||0;
-      if (payment < 100) {
-        document.getElementById('f-rate').classList.add('err');
-        document.getElementById('e-rate').classList.add('show');
-        ok = false;
-      }
-    } else {
-      payment = Number(document.getElementById('f-price').value)||0;
-      if (payment < 100) {
-        document.getElementById('f-price').classList.add('err');
-        document.getElementById('e-price').classList.add('show');
-        ok = false;
-      }
-    }
-
-    if (!ok) {
-      toast('Проверь форму', 'Заполни поля отмеченные красным', true);
-      return;
-    }
-
-    var desc = document.getElementById('f-desc').value.trim();
-    var parts = dateVal.split('-');
-    var dtStr = parts[2]+'.'+parts[1]+' в '+timeVal;
-    var title = desc.slice(0,50) || ('Грузчики '+workers+' чел. '+dtStr);
-
-    var order = {
-      action:       'create_order',
-      title:        title,
-      description:  desc || ('Грузчики: '+workers+' чел.'),
-      address:      addr,
-      date:         dtStr,
-      payment:      payment,
-      pay_type:     payType,
-      workers:      workers,
-      is_permanent: isPerm,
-      pay_mode:     payMethod
-    };
-
-    sendToBotOrDemo(order,
-      function() {
-        var payLabel = payType==='hourly' ? fmt(payment)+' ₽/час' : fmt(payment)+' ₽';
-        myOrders.unshift({id:Math.floor(100000+Math.random()*900000),title:title,addr:addr,dt:dtStr,pay:payLabel,status:'open'});
-        renderMOL();
-        gt('status');
-        toast('Заказ создан (демо)!', 'В Telegram данные уйдут боту');
-      },
-      '✅ Заказ опубликован!'
-    );
-  } catch(e) {
-    toast('Ошибка JS: '+e.message, '', true);
-  }
-}
-
-// ── ЗАГРУЗКА ДАННЫХ ИЗ БД ──
-var BASE_URL = 'https://quarters-semisweet-cut.ngrok-free.dev';
+// ── ЗАГРУЗКА ДАННЫХ ──
+var H = {'ngrok-skip-browser-warning':'1'};
 
 function loadData() {
-  var h = {'ngrok-skip-browser-warning': '1'};
-
-  // Профиль
-  fetch(BASE_URL + '/profile?user_id=' + CURRENT_USER_ID, {headers: h})
-  .then(function(r){ return r.json(); })
+  fetch(BASE_URL+'/profile?user_id='+CURRENT_USER_ID, {headers:H})
+  .then(function(r){return r.json();})
   .then(function(d){
     if (!d.ok) return;
-    profile.name    = d.name;
-    profile.phone   = d.phone;
-    profile.balance = d.balance;
-    profile.oc      = d.orders_as_client;
-    profile.ow      = d.orders_as_worker;
-    profile.rc      = d.rating_client;
-    profile.rw      = d.rating_worker;
-    onShift         = d.on_shift;
+    profile.name=d.name; profile.phone=d.phone; profile.balance=d.balance;
+    profile.oc=d.orders_as_client; profile.ow=d.orders_as_worker;
+    profile.rc=d.rating_client; profile.rw=d.rating_worker;
+    onShift=d.on_shift;
     renderProfile();
     renderShift();
-    // Показываем тост если на смене
-    if (onShift) toast('Ты на смене сегодня! 💪', 'До 00:00');
-  })
-  .catch(function(){});
-
-  // Открытые заказы для биржи
-  fetch(BASE_URL + '/open_orders', {headers: h})
-  .then(function(r){ return r.json(); })
-  .then(function(d){
-    if (!d.ok) return;
-    openOrders = d.orders;
-    if (onShift) renderOrders();
-  })
-  .catch(function(){});
-  .then(function(r){ return r.json(); })
-  .then(function(d){
-    if (!d.ok) return;
-    myOrders = d.orders.map(function(o){
-      var payLabel = o.payment + (o.pay_type === 'hourly' ? ' ₽/час' : ' ₽');
-      return {
-        id: o.id,
-        title: o.title,
-        addr: o.address,
-        dt: o.date,
-        pay: fmt(o.payment) + ' ₽',
-        status: o.status
-      };
-    });
-    renderMOL();
-  })
-  .catch(function(){});
+  }).catch(function(){});
 }
 
+function loadMyOrders() {
+  var el=document.getElementById('myorders-list');
+  el.innerHTML='<div class="loading">Загрузка…</div>';
+  fetch(BASE_URL+'/orders?user_id='+CURRENT_USER_ID, {headers:H})
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if (!d.ok||!d.orders.length){el.innerHTML='<div class="loading">Нет заказов</div>';return;}
+    var sc={open:'<span class="badge b-open">Открыт</span>',in_progress:'<span class="badge b-prog">В работе</span>',done:'<span class="badge b-done">Выполнен</span>'};
+    el.innerHTML=d.orders.map(function(o){
+      var btn=o.status==='open'||o.status==='in_progress'
+        ?'<button class="btn-dark" style="margin-top:10px;" onclick="showResponses('+o.id+')">👥 Посмотреть отклики</button>':''
+      ;
+      return '<div class="ocard"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">'
+        +'<div><div style="font-size:10px;color:#5A5A64;">#'+o.id+'</div>'
+        +'<div style="font-size:14px;font-weight:700;margin-top:2px;">'+o.title+'</div></div>'
+        +(sc[o.status]||sc.open)+'</div>'
+        +'<div style="font-size:11px;color:#6A6A72;">📍 '+o.address+' · 📅 '+o.date+'</div>'
+        +'<div style="font-size:12px;font-weight:700;color:#FFC107;margin-top:4px;">💵 '+fmt(o.payment)+' ₽</div>'
+        +btn+'</div>';
+    }).join('');
+  }).catch(function(){el.innerHTML='<div class="loading">Ошибка загрузки</div>';});
+}
 
-var API_URL = 'https://quarters-semisweet-cut.ngrok-free.dev/miniapp';
+function loadOpenOrders() {
+  var el=document.getElementById('shift-orders-list');
+  el.innerHTML='<div class="loading">Загрузка…</div>';
+  document.getElementById('shift-orders-wrap').style.display='';
+  fetch(BASE_URL+'/open_orders', {headers:H})
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if (!d.ok||!d.orders.length){el.innerHTML='<div class="loading">Нет доступных заказов</div>';return;}
+    el.innerHTML=d.orders.map(function(o){
+      var ci=o.rating_client!==undefined
+        ?'<div style="font-size:10px;color:#B58A14;margin-top:5px;">👤 Заказчик: ⭐'+parseFloat(o.rating_client).toFixed(1)+' | '+o.orders_as_client+' заказов</div>':''
+      ;
+      var perm=o.is_permanent?'<span style="font-size:10px;color:#60A5FA;">🔁 </span>':'';
+      return '<div class="ocard" style="cursor:pointer;" onclick="respondOrder('+o.id+')">'
+        +'<div style="display:flex;justify-content:space-between;margin-bottom:6px;">'
+        +'<div style="font-size:14px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+perm+o.title+'</div>'
+        +'<div style="font-size:14px;font-weight:800;color:#FFC107;margin-left:8px;white-space:nowrap;">'+fmt(o.payment)+' ₽</div>'
+        +'</div>'
+        +'<div style="font-size:11px;color:#6A6A72;">📍 '+o.address+'</div>'
+        +'<div style="font-size:11px;color:#6A6A72;">📅 '+o.date+'</div>'
+        +ci+'</div>';
+    }).join('');
+  }).catch(function(){el.innerHTML='<div class="loading">Ошибка загрузки</div>';});
+}
 
-function sendToBotOrDemo(data, demoCallback, successMsg) {
-  data.user_id = CURRENT_USER_ID;
+function loadMyResponses() {
+  var el=document.getElementById('myresponses-list');
+  el.innerHTML='<div class="loading">Загрузка…</div>';
+  fetch(BASE_URL+'/worker_orders?user_id='+CURRENT_USER_ID, {headers:H})
+  .then(function(r){return r.json();})
+  .then(function(d){
+    if (!d.ok||!d.orders.length){el.innerHTML='<div class="loading">Нет откликов</div>';return;}
+    var rs={pending:'<span class="badge b-pend">⏳ Ожидает</span>',approved:'<span class="badge b-open">✅ Одобрен</span>',rejected:'<span class="badge b-rej">❌ Отклонён</span>'};
+    el.innerHTML=d.orders.map(function(o){
+      return '<div class="ocard">'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">'
+        +'<div><div style="font-size:10px;color:#5A5A64;">#'+o.id+'</div>'
+        +'<div style="font-size:14px;font-weight:700;margin-top:2px;">'+o.title+'</div></div>'
+        +(rs[o.resp_status]||rs.pending)+'</div>'
+        +'<div style="font-size:11px;color:#6A6A72;">📍 '+o.address+' · 📅 '+o.date+'</div>'
+        +'<div style="font-size:12px;font-weight:700;color:#FFC107;margin-top:4px;">💵 '+fmt(o.payment)+' ₽</div>'
+        +'</div>';
+    }).join('');
+  }).catch(function(){el.innerHTML='<div class="loading">Ошибка загрузки</div>';});
+}
 
-  if (CURRENT_USER_ID > 0) {
-    fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': '1'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(function(r){ return r.json(); })
-    .then(function(r){
-      if (r && r.ok) {
-        if (successMsg) toast(successMsg, 'Данные обновлены');
-        setTimeout(loadData, 1000);
-      } else {
-        toast('Ошибка: '+(r.error||'неизвестно'), '', true);
-        if (demoCallback) demoCallback();
-      }
-    })
-    .catch(function(e){
-      toast('Нет связи с сервером', e.message, true);
-      if (demoCallback) demoCallback();
-    });
-  } else {
-    // Браузер без Telegram — демо режим
-    if (demoCallback) demoCallback();
+// ── ОТКЛИКИ НА МОЙ ЗАКАЗ ──
+function showResponses(orderId) {
+  var el=document.getElementById('myorders-list');
+  el.innerHTML='<div class="loading">Загрузка откликов…</div>';
+  fetch(BASE_URL+'/responses?order_id='+orderId+'&user_id='+CURRENT_USER_ID, {headers:H})
+  .then(function(r){return r.json();})
+  .then(function(d){
+    var back='<button class="btn-dark" style="margin-bottom:12px;" onclick="loadMyOrders()">← Назад к заказам</button>';
+    if (!d.ok||!d.responses||!d.responses.length){
+      el.innerHTML=back+'<div class="loading">Откликов пока нет</div>';return;
+    }
+    var sm={pending:'⏳ Ожидает',approved:'✅ Одобрен',rejected:'❌ Отклонён'};
+    el.innerHTML=back+d.responses.map(function(r){
+      var btns=r.status==='pending'
+        ?'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">'
+          +'<button class="btn-green" onclick="approveResp('+r.id+','+orderId+','+r.worker_id+')">✅ Одобрить</button>'
+          +'<button class="btn-red" onclick="rejectResp('+r.id+','+r.worker_id+','+orderId+')">❌ Отклонить</button>'
+          +'</div>'
+        :'<div style="margin-top:8px;font-size:11px;color:#6A6A72;">'+sm[r.status]+'</div>';
+      return '<div class="ocard">'
+        +'<div style="font-size:15px;font-weight:800;">'+r.name+'</div>'
+        +'<div style="font-size:12px;color:#6A6A72;margin-top:3px;">📱 '+r.phone+'</div>'
+        +'<div style="font-size:12px;color:#FFC107;margin-top:3px;">⭐ '+parseFloat(r.rating_worker).toFixed(1)+' | '+r.orders_as_worker+' заказов</div>'
+        +btns+'</div>';
+    }).join('');
+  }).catch(function(){el.innerHTML='<div class="loading">Ошибка</div>';});
+}
+
+function approveResp(respId,orderId,workerId) {
+  api({action:'approve_response',resp_id:respId,order_id:orderId,worker_id:workerId},'✅ Исполнитель одобрен!');
+  setTimeout(function(){showResponses(orderId);},1200);
+}
+function rejectResp(respId,workerId,orderId) {
+  api({action:'reject_response',resp_id:respId,worker_id:workerId},'❌ Отклик отклонён');
+  setTimeout(function(){showResponses(orderId);},800);
+}
+
+// ── СМЕНА ──
+function renderShift() {
+  var btn=document.getElementById('shift-btn');
+  if (onShift) {
+    document.getElementById('shift-card').style.background='linear-gradient(135deg,#1A2E1A,#0F1F0F)';
+    document.getElementById('shift-title').textContent='🟢 Ты на смене!';
+    document.getElementById('shift-sub').textContent='Активна до 00:00';
+    document.getElementById('shift-emoji').textContent='💪';
+    btn.textContent='✅ Смена активна';
+    btn.style.background='linear-gradient(135deg,#1FBF61,#159A4C)';
+    document.getElementById('shift-orders-wrap').style.display='';
+    loadOpenOrders();
   }
 }
 
 function toggleShift() {
-  if (!onShift) {
-    sendToBotOrDemo(
-      {action:'pay_shift'},
-      function() {
-        onShift = true;
-        renderShift();
-        toast('Смена активирована (демо)!', 'До 00:00 сегодня');
-      },
-      '✅ Смена активирована!'
-    );
-  } else {
-    toast('Смена активна до 00:00', 'Смотри заказы ниже');
-  }
-}
-
-function topUp() {
-  var amount = Number(document.getElementById('topup-amount').value);
-  if (!amount || amount < 1) {
-    toast('Введите сумму', 'Например: 500', true);
-    return;
-  }
-  sendToBotOrDemo(
-    {action:'top_up', amount:amount},
-    function() {
-      profile.balance += amount;
-      document.getElementById('pbal').textContent = fmt(profile.balance)+' ₽';
-      document.getElementById('topup-amount').value = '';
-      toast('Пополнено на '+fmt(amount)+' ₽ (демо)', 'Баланс обновлён');
-    },
-    '✅ Кошелёк пополнен на '+amount+' ₽'
-  );
+  if (onShift) { toast('Смена уже активна','До 00:00'); return; }
+  api({action:'pay_shift'},'✅ Смена активирована!');
+  setTimeout(function(){onShift=true;renderShift();},600);
 }
 
 function respondOrder(id) {
-  sendToBotOrDemo(
-    {action:'respond_order', order_id:id},
-    function() {
-      toast('Отклик отправлен (демо)!', 'Заказчик получит уведомление');
-    }
-  );
+  api({action:'respond_order',order_id:id},'✅ Отклик отправлен!');
 }
 
-function renderShift() {
-  var card = document.getElementById('shift-card');
-  var btn  = document.getElementById('shift-btn');
-  if (onShift) {
-    card.classList.add('shift-on');
-    document.getElementById('shift-title').textContent = '🟢 Ты на смене!';
-    document.getElementById('shift-sub').textContent   = 'Активна до 00:00 сегодня';
-    document.getElementById('shift-emoji').textContent = '💪';
-    btn.textContent = '✅ Смена активна';
-    btn.style.background = 'linear-gradient(135deg,#1FBF61,#159A4C)';
-    document.getElementById('shift-orders').style.display = '';
-    renderOrders();
+// ── ФОРМА ЗАКАЗА ──
+function cw(d){workers=Math.max(1,Math.min(20,workers+d));document.getElementById('wv').textContent=workers;updateHint();}
+
+function setPayType(t) {
+  payType=t;
+  document.getElementById('block-hourly').style.display=t==='hourly'?'':'none';
+  document.getElementById('block-fixed').style.display=t==='fixed'?'':'none';
+  var b=document.getElementById('seg-paytype').querySelectorAll('.seg-btn');
+  b[0].classList.toggle('active',t==='hourly'); b[1].classList.toggle('active',t==='fixed');
+}
+function setHire(v) {
+  isPerm=v;
+  var b=document.getElementById('seg-hire').querySelectorAll('.seg-btn');
+  b[0].classList.toggle('active',v===0); b[1].classList.toggle('active',v===1);
+  document.getElementById('btn-publish-txt').textContent=v===1?'Опубликовать — 100 ₽':'Опубликовать — 50 ₽';
+}
+function setMethod(m) {
+  payMethod=m;
+  var b=document.getElementById('seg-method').querySelectorAll('.seg-btn');
+  b[0].classList.toggle('active',m==='cash'); b[1].classList.toggle('active',m==='transfer');
+}
+function updateHint() {
+  var r=Number(document.getElementById('f-rate').value)||0;
+  document.getElementById('hint-total').textContent=r>=100?fmt(r*2*workers):'—';
+}
+
+function submitOrder() {
+  // Сброс ошибок
+  ['f-addr','f-date','f-time','f-rate','f-price'].forEach(function(id){
+    var e=document.getElementById(id); if(e) e.classList.remove('err');
+  });
+  ['e-addr','e-date','e-time','e-rate','e-price'].forEach(function(id){
+    var e=document.getElementById(id); if(e) e.classList.remove('show');
+  });
+
+  var ok=true;
+  var addr=document.getElementById('f-addr').value.trim();
+  if (addr.length<3){document.getElementById('f-addr').classList.add('err');document.getElementById('e-addr').classList.add('show');ok=false;}
+  var dv=document.getElementById('f-date').value;
+  if (!dv){document.getElementById('f-date').classList.add('err');document.getElementById('e-date').classList.add('show');ok=false;}
+  var tv=document.getElementById('f-time').value;
+  if (!tv){document.getElementById('f-time').classList.add('err');document.getElementById('e-time').classList.add('show');ok=false;}
+
+  var payment=0;
+  if (payType==='hourly') {
+    payment=Number(document.getElementById('f-rate').value)||0;
+    if (payment<100){document.getElementById('f-rate').classList.add('err');document.getElementById('e-rate').classList.add('show');ok=false;}
   } else {
-    card.classList.remove('shift-on');
-    document.getElementById('shift-title').textContent = 'Не на смене';
-    document.getElementById('shift-sub').textContent   = 'Оплатите смену чтобы видеть заказы (20 ₽)';
-    document.getElementById('shift-emoji').textContent = '😴';
-    btn.innerHTML = '🟢 Выйти на смену — 20 ₽';
-    btn.style.background = '';
-    document.getElementById('shift-orders').style.display = 'none';
+    payment=Number(document.getElementById('f-price').value)||0;
+    if (payment<100){document.getElementById('f-price').classList.add('err');document.getElementById('e-price').classList.add('show');ok=false;}
   }
+  if (!ok){toast('Проверь форму','Заполни поля отмеченные красным',true);return;}
+
+  var parts=dv.split('-');
+  var dtStr=parts[2]+'.'+parts[1]+' в '+tv;
+  var desc=document.getElementById('f-desc').value.trim();
+  var title=desc.slice(0,50)||('Грузчики '+workers+' чел. '+dtStr);
+
+  api({
+    action:'create_order',title:title,description:desc||title,
+    address:addr,date:dtStr,payment:payment,
+    pay_type:payType,workers:workers,is_permanent:isPerm,pay_mode:payMethod
+  },'✅ Заказ опубликован!');
 }
 
-function renderOrders() {
-  var el = document.getElementById('orders-list');
-  if (!openOrders.length && !demoOrders.length) {
-    el.innerHTML='<div style="text-align:center;padding:20px;color:#5A5A64;font-size:13px;">Нет доступных заказов</div>';
-    return;
-  }
-  var all = openOrders.length ? openOrders : demoOrders;
-  el.innerHTML = all.map(function(o) {
-    var clientInfo = o.rating_client
-      ? '<div style="font-size:10px;color:#B58A14;margin-top:5px;">👤 Заказчик: ⭐'+o.rating_client.toFixed(1)+' | '+o.orders_as_client+' заказов</div>'
-      : '';
-    var perm = o.is_permanent ? '<span style="font-size:10px;color:#60A5FA;">🔁 Постоянный</span> ' : '';
-    return '<div class="ocard" style="cursor:pointer;" onclick="respondOrder('+o.id+')">'
-      +'<div style="display:flex;justify-content:space-between;margin-bottom:6px;">'
-      +'<div style="font-size:14px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+perm+o.title+'</div>'
-      +'<div style="font-size:14px;font-weight:800;color:#FFC107;margin-left:8px;white-space:nowrap;">'+fmt(o.payment)+(o.pay_type==='hourly'?' ₽/ч':' ₽')+'</div>'
-      +'</div>'
-      +'<div style="font-size:11px;color:#6A6A72;">📍 '+(o.address||o.addr||'')+'</div>'
-      +'<div style="font-size:11px;color:#6A6A72;">📅 '+(o.date||o.dt||'')+'</div>'
-      + clientInfo
-      +'</div>';
-  }).join('');
+// ── КОШЕЛЁК ──
+function topUp() {
+  var a=Number(document.getElementById('topup-amount').value);
+  if (!a||a<1){toast('Введите сумму','',true);return;}
+  api({action:'top_up',amount:a},'✅ Пополнено на '+fmt(a)+' ₽');
+  document.getElementById('topup-amount').value='';
+  setTimeout(loadData,1000);
 }
 
-// ── МОИ ЗАКАЗЫ (заказчик) ──
-function renderMOL() {
-  var el = document.getElementById('mol');
-  if (!myOrders.length) {
-    el.innerHTML = '<div style="text-align:center;padding:40px 0;color:#5A5A64;font-size:13px;">Нет заказов<br><span style="color:#3A3A44;font-size:11px;">Создайте во вкладке «Заказ»</span></div>';
-    return;
-  }
-  var sc = {open:'<span class="badge b-open">Открыт</span>',in_progress:'<span class="badge b-prog">В работе</span>',done:'<span class="badge b-done">Выполнен</span>'};
-  el.innerHTML = myOrders.map(function(o) {
-    return '<div class="ocard">'
-      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">'
-      +'<div style="flex:1;margin-right:8px;"><div style="font-size:10px;color:#5A5A64;margin-bottom:2px;">#'+o.id+'</div>'
-      +'<div style="font-size:14px;font-weight:700;">'+o.title+'</div></div>'
-      +(sc[o.status]||sc.open)+'</div>'
-      +'<div style="font-size:11px;color:#6A6A72;margin-bottom:10px;">'
-      +'📍 '+o.addr+' · 📅 '+o.dt+' · <span style="color:#FFC107;font-weight:700;">'+o.pay+'</span></div>'
-      +(o.status==='open'||o.status==='in_progress'
-        ? '<button onclick="showResponses('+o.id+')" style="width:100%;border:1px solid #2A2A32;border-radius:10px;padding:9px;background:#121216;color:#F4F4F7;font-size:12px;font-weight:700;cursor:pointer;">👥 Отклики</button>'
-        : '')
-      +'</div>';
-  }).join('');
-}
-
-// ── ОТКЛИКИ ──
-function showResponses(orderId) {
-  var h = {'ngrok-skip-browser-warning': '1'};
-  fetch(BASE_URL + '/responses?order_id='+orderId+'&user_id='+CURRENT_USER_ID, {headers: h})
-  .then(function(r){ return r.json(); })
-  .then(function(d){
-    if (!d.ok) { toast('Ошибка загрузки откликов','',true); return; }
-    var resps = d.responses;
-    var el = document.getElementById('mol');
-    if (!resps.length) {
-      el.innerHTML = '<div style="text-align:center;padding:20px;color:#5A5A64;font-size:13px;">Откликов пока нет</div>'
-        +'<button onclick="renderMOL()" style="width:100%;border:1px solid #2A2A32;border-radius:10px;padding:10px;background:#1E1E24;color:#F4F4F7;font-size:13px;font-weight:700;cursor:pointer;margin-top:10px;">← Назад</button>';
-      return;
-    }
-    var statusMap = {pending:'⏳ Ожидает',approved:'✅ Одобрен',rejected:'❌ Отклонён'};
-    el.innerHTML = '<button onclick="renderMOL()" style="width:100%;border:1px solid #2A2A32;border-radius:10px;padding:10px;background:#1E1E24;color:#F4F4F7;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:12px;">← Назад к заказам</button>'
-      + resps.map(function(r){
-        var btns = r.status === 'pending'
-          ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">'
-            +'<button onclick="approveResp('+r.id+','+orderId+','+r.worker_id+')" style="border:0;border-radius:10px;padding:10px;background:linear-gradient(135deg,#1FBF61,#159A4C);color:#fff;font-size:12px;font-weight:800;cursor:pointer;">✅ Одобрить</button>'
-            +'<button onclick="rejectResp('+r.id+','+r.worker_id+')" style="border:1px solid #4A1A1A;border-radius:10px;padding:10px;background:#1E1212;color:#EF4444;font-size:12px;font-weight:800;cursor:pointer;">❌ Отклонить</button>'
-            +'</div>'
-          : '<div style="margin-top:8px;font-size:11px;color:#6A6A72;">'+statusMap[r.status]+'</div>';
-        return '<div class="ocard">'
-          +'<div style="font-size:15px;font-weight:800;margin-bottom:4px;">'+r.name+'</div>'
-          +'<div style="font-size:12px;color:#6A6A72;margin-bottom:4px;">📱 '+r.phone+'</div>'
-          +'<div style="font-size:12px;color:#FFC107;">⭐ '+r.rating_worker.toFixed(1)+' | '+r.orders_as_worker+' заказов</div>'
-          + btns
-          +'</div>';
-      }).join('');
-  })
-  .catch(function(){ toast('Нет связи','',true); });
-}
-
-function approveResp(respId, orderId, workerId) {
-  sendToBotOrDemo(
-    {action:'approve_response', resp_id:respId, order_id:orderId, worker_id:workerId},
-    null,
-    '✅ Исполнитель одобрен!'
-  );
-  setTimeout(function(){ showResponses(orderId); }, 1200);
-}
-
-function rejectResp(respId, workerId) {
-  if (!confirm('Отклонить этот отклик?')) return;
-  sendToBotOrDemo(
-    {action:'reject_response', resp_id:respId, worker_id:workerId},
-    null,
-    '❌ Отклик отклонён'
-  );
-  setTimeout(renderMOL, 800);
-}
-
-
+// ── ПРОФИЛЬ ──
 function renderProfile() {
-  document.getElementById('pname').textContent  = profile.name  || 'Пользователь';
-  document.getElementById('pphone').textContent = profile.phone || 'Телефон из бота';
-  document.getElementById('av').textContent     = (profile.name||'П')[0].toUpperCase();
-  document.getElementById('pbal').textContent   = fmt(profile.balance)+' ₽';
-  document.getElementById('prc').textContent    = profile.oc;
-  document.getElementById('prw').textContent    = profile.ow;
-  document.getElementById('prc-r').textContent  = '⭐ '+profile.rc.toFixed(1);
-  document.getElementById('prw-r').textContent  = '⭐ '+profile.rw.toFixed(1);
+  document.getElementById('pname').textContent=profile.name||'Пользователь';
+  document.getElementById('pphone').textContent=profile.phone||'Телефон из бота';
+  document.getElementById('av').textContent=(profile.name||'П')[0].toUpperCase();
+  document.getElementById('pbal').textContent=fmt(profile.balance)+' ₽';
+  document.getElementById('prc').textContent=profile.oc;
+  document.getElementById('prw').textContent=profile.ow;
+  document.getElementById('prc-r').textContent='⭐ '+parseFloat(profile.rc||5).toFixed(1);
+  document.getElementById('prw-r').textContent='⭐ '+parseFloat(profile.rw||5).toFixed(1);
 }
 
+// ── API ──
+function api(data, successMsg) {
+  data.user_id=CURRENT_USER_ID;
+  if (CURRENT_USER_ID===0) {toast('Откройте через Telegram','Демо-режим');return;}
+  fetch(BASE_URL+'/miniapp',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'1'},
+    body:JSON.stringify(data)
+  })
+  .then(function(r){return r.json();})
+  .then(function(r){
+    if (r&&r.ok){if(successMsg)toast(successMsg,'');setTimeout(loadData,1000);}
+    else toast('Ошибка: '+(r.error||''),'',true);
+  })
+  .catch(function(){toast('Нет связи с сервером','',true);});
+}
 
-function fmt(n) { return new Intl.NumberFormat('ru-RU').format(n); }
-
+// ── UTILS ──
+function fmt(n){return new Intl.NumberFormat('ru-RU').format(n);}
 var _tt;
-function toast(t,m,isErr) {
-  document.getElementById('tt').textContent = t;
-  document.getElementById('tm').textContent = m||'';
-  document.getElementById('t-icon').style.background = isErr ? '#BF3A1F' : '#1FBF61';
-  var el = document.getElementById('toast');
+function toast(t,m,isErr){
+  document.getElementById('tt').textContent=t;
+  document.getElementById('tm').textContent=m||'';
+  document.getElementById('t-icon').style.background=isErr?'#BF3A1F':'#1FBF61';
+  var el=document.getElementById('toast');
   el.classList.add('show');
-  clearTimeout(_tt);
-  _tt = setTimeout(function(){ el.classList.remove('show'); }, 3000);
+  clearTimeout(_tt);_tt=setTimeout(function(){el.classList.remove('show');},3000);
 }
 </script>
 </body>
