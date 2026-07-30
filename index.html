@@ -129,7 +129,7 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.4);}
   </div>
   <button class="btn-gold" id="btn-submit" onclick="submitOrder()">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M13.5 2 5 13.2h5.2L9.3 22 19 10.2h-5.4z"/></svg>
-    Опубликовать заказ
+    <span id="btn-submit-text">Опубликовать — 50 ₽</span>
   </button>
 </div>
 
@@ -221,9 +221,9 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.4);}
 <script>
 var workers=1, isPerm=0, payType='hourly', payMethod='cash', onShift=false;
 var profile={name:'',phone:'',balance:0,oc:0,ow:0,rc:5.0,rw:5.0};
-var myOrders=[], demoOrders=[
-  {id:101,title:'Переезд квартиры',addr:'ул. Гагарина, 12',dt:'Сегодня 14:00',pay:'500 ₽/час',w:2},
-  {id:102,title:'Погрузка коробок',addr:'пр. Победы, 45',dt:'Завтра 09:00',pay:'2 000 ₽',w:1},
+var myOrders=[], openOrders=[], demoOrders=[
+  {id:101,title:'Переезд квартиры',addr:'ул. Гагарина, 12',dt:'Сегодня 14:00',pay:'500 ₽/час',w:2,rating_client:4.8,orders_as_client:5},
+  {id:102,title:'Погрузка коробок',addr:'пр. Победы, 45',dt:'Завтра 09:00',pay:'2 000 ₽',w:1,rating_client:5.0,orders_as_client:2},
 ];
 var CURRENT_USER_ID = 0;
 
@@ -284,6 +284,7 @@ function setHire(v) {
   var btns = document.getElementById('seg-hire').querySelectorAll('.seg-btn');
   btns[0].classList.toggle('active', v===0);
   btns[1].classList.toggle('active', v===1);
+  document.getElementById('btn-submit-text').textContent = v===1 ? 'Опубликовать — 100 ₽' : 'Опубликовать — 50 ₽';
 }
 
 function setMethod(m) {
@@ -411,8 +412,15 @@ function loadData() {
   })
   .catch(function(){});
 
-  // Мои заказы
-  fetch(BASE_URL + '/orders?user_id=' + CURRENT_USER_ID, {headers: h})
+  // Открытые заказы для биржи
+  fetch(BASE_URL + '/open_orders', {headers: h})
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if (!d.ok) return;
+    openOrders = d.orders;
+    if (onShift) renderOrders();
+  })
+  .catch(function(){});
   .then(function(r){ return r.json(); })
   .then(function(d){
     if (!d.ok) return;
@@ -535,20 +543,29 @@ function renderShift() {
 
 function renderOrders() {
   var el = document.getElementById('orders-list');
-  var all = demoOrders.concat(myOrders.filter(function(o){return o.status==='open';}));
-  if (!all.length) { el.innerHTML='<div style="text-align:center;padding:20px;color:#5A5A64;font-size:13px;">Нет доступных заказов</div>'; return; }
+  if (!openOrders.length && !demoOrders.length) {
+    el.innerHTML='<div style="text-align:center;padding:20px;color:#5A5A64;font-size:13px;">Нет доступных заказов</div>';
+    return;
+  }
+  var all = openOrders.length ? openOrders : demoOrders;
   el.innerHTML = all.map(function(o) {
+    var clientInfo = o.rating_client
+      ? '<div style="font-size:10px;color:#B58A14;margin-top:5px;">👤 Заказчик: ⭐'+o.rating_client.toFixed(1)+' | '+o.orders_as_client+' заказов</div>'
+      : '';
+    var perm = o.is_permanent ? '<span style="font-size:10px;color:#60A5FA;">🔁 Постоянный</span> ' : '';
     return '<div class="ocard" style="cursor:pointer;" onclick="respondOrder('+o.id+')">'
-      +'<div style="display:flex;justify-content:space-between;margin-bottom:7px;">'
-      +'<div style="font-size:14px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+o.title+'</div>'
-      +'<div style="font-size:14px;font-weight:800;color:#FFC107;margin-left:8px;white-space:nowrap;">'+o.pay+'</div>'
+      +'<div style="display:flex;justify-content:space-between;margin-bottom:6px;">'
+      +'<div style="font-size:14px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+perm+o.title+'</div>'
+      +'<div style="font-size:14px;font-weight:800;color:#FFC107;margin-left:8px;white-space:nowrap;">'+fmt(o.payment)+(o.pay_type==='hourly'?' ₽/ч':' ₽')+'</div>'
       +'</div>'
-      +'<div style="font-size:11px;color:#6A6A72;">📍 '+o.addr+' · 📅 '+o.dt+' · 👤 '+o.w+' чел.</div>'
+      +'<div style="font-size:11px;color:#6A6A72;">📍 '+(o.address||o.addr||'')+'</div>'
+      +'<div style="font-size:11px;color:#6A6A72;">📅 '+(o.date||o.dt||'')+'</div>'
+      + clientInfo
       +'</div>';
   }).join('');
 }
 
-// ── МОИ ЗАКАЗЫ ──
+// ── МОИ ЗАКАЗЫ (заказчик) ──
 function renderMOL() {
   var el = document.getElementById('mol');
   if (!myOrders.length) {
@@ -562,13 +579,69 @@ function renderMOL() {
       +'<div style="flex:1;margin-right:8px;"><div style="font-size:10px;color:#5A5A64;margin-bottom:2px;">#'+o.id+'</div>'
       +'<div style="font-size:14px;font-weight:700;">'+o.title+'</div></div>'
       +(sc[o.status]||sc.open)+'</div>'
-      +'<div style="font-size:11px;color:#6A6A72;display:flex;flex-wrap:wrap;gap:8px;">'
-      +'<span>📍 '+o.addr+'</span><span>📅 '+o.dt+'</span>'
-      +'<span style="color:#FFC107;font-weight:700;">💵 '+o.pay+'</span></div></div>';
+      +'<div style="font-size:11px;color:#6A6A72;margin-bottom:10px;">'
+      +'📍 '+o.addr+' · 📅 '+o.dt+' · <span style="color:#FFC107;font-weight:700;">'+o.pay+'</span></div>'
+      +(o.status==='open'||o.status==='in_progress'
+        ? '<button onclick="showResponses('+o.id+')" style="width:100%;border:1px solid #2A2A32;border-radius:10px;padding:9px;background:#121216;color:#F4F4F7;font-size:12px;font-weight:700;cursor:pointer;">👥 Отклики</button>'
+        : '')
+      +'</div>';
   }).join('');
 }
 
-// ── ПРОФИЛЬ ──
+// ── ОТКЛИКИ ──
+function showResponses(orderId) {
+  var h = {'ngrok-skip-browser-warning': '1'};
+  fetch(BASE_URL + '/responses?order_id='+orderId+'&user_id='+CURRENT_USER_ID, {headers: h})
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    if (!d.ok) { toast('Ошибка загрузки откликов','',true); return; }
+    var resps = d.responses;
+    var el = document.getElementById('mol');
+    if (!resps.length) {
+      el.innerHTML = '<div style="text-align:center;padding:20px;color:#5A5A64;font-size:13px;">Откликов пока нет</div>'
+        +'<button onclick="renderMOL()" style="width:100%;border:1px solid #2A2A32;border-radius:10px;padding:10px;background:#1E1E24;color:#F4F4F7;font-size:13px;font-weight:700;cursor:pointer;margin-top:10px;">← Назад</button>';
+      return;
+    }
+    var statusMap = {pending:'⏳ Ожидает',approved:'✅ Одобрен',rejected:'❌ Отклонён'};
+    el.innerHTML = '<button onclick="renderMOL()" style="width:100%;border:1px solid #2A2A32;border-radius:10px;padding:10px;background:#1E1E24;color:#F4F4F7;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:12px;">← Назад к заказам</button>'
+      + resps.map(function(r){
+        var btns = r.status === 'pending'
+          ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">'
+            +'<button onclick="approveResp('+r.id+','+orderId+','+r.worker_id+')" style="border:0;border-radius:10px;padding:10px;background:linear-gradient(135deg,#1FBF61,#159A4C);color:#fff;font-size:12px;font-weight:800;cursor:pointer;">✅ Одобрить</button>'
+            +'<button onclick="rejectResp('+r.id+','+r.worker_id+')" style="border:1px solid #4A1A1A;border-radius:10px;padding:10px;background:#1E1212;color:#EF4444;font-size:12px;font-weight:800;cursor:pointer;">❌ Отклонить</button>'
+            +'</div>'
+          : '<div style="margin-top:8px;font-size:11px;color:#6A6A72;">'+statusMap[r.status]+'</div>';
+        return '<div class="ocard">'
+          +'<div style="font-size:15px;font-weight:800;margin-bottom:4px;">'+r.name+'</div>'
+          +'<div style="font-size:12px;color:#6A6A72;margin-bottom:4px;">📱 '+r.phone+'</div>'
+          +'<div style="font-size:12px;color:#FFC107;">⭐ '+r.rating_worker.toFixed(1)+' | '+r.orders_as_worker+' заказов</div>'
+          + btns
+          +'</div>';
+      }).join('');
+  })
+  .catch(function(){ toast('Нет связи','',true); });
+}
+
+function approveResp(respId, orderId, workerId) {
+  sendToBotOrDemo(
+    {action:'approve_response', resp_id:respId, order_id:orderId, worker_id:workerId},
+    null,
+    '✅ Исполнитель одобрен!'
+  );
+  setTimeout(function(){ showResponses(orderId); }, 1200);
+}
+
+function rejectResp(respId, workerId) {
+  if (!confirm('Отклонить этот отклик?')) return;
+  sendToBotOrDemo(
+    {action:'reject_response', resp_id:respId, worker_id:workerId},
+    null,
+    '❌ Отклик отклонён'
+  );
+  setTimeout(renderMOL, 800);
+}
+
+
 function renderProfile() {
   document.getElementById('pname').textContent  = profile.name  || 'Пользователь';
   document.getElementById('pphone').textContent = profile.phone || 'Телефон из бота';
