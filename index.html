@@ -378,38 +378,36 @@ function submitOrder() {
   }
 }
 
-// ── ОТПРАВКА БОТУ через fetch ──
-var BOT_TOKEN = '8727111036:AAEtREM0b27n7m6Ue9jUKQYhPnD4Pz2iF88';
+// ── ОТПРАВКА БОТУ через ngrok ──
+var API_URL = 'https://quarters-semisweet-cut.ngrok-free.dev/miniapp';
 
 function sendToBotOrDemo(data, demoCallback) {
   var tg = window.Telegram && window.Telegram.WebApp;
   var userId = tg && tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.id;
 
-  if (userId) {
-    // Отправляем боту через sendMessage с JSON в тексте
-    // Бот поймает это как команду
-    var text = '/miniapp ' + JSON.stringify(data);
-    fetch('https://api.telegram.org/bot' + BOT_TOKEN + '/sendMessage', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        chat_id: userId,
-        text: text
-      })
-    })
-    .then(function(r){ return r.json(); })
-    .then(function(r){
-      if (!r.ok) {
-        toast('Ошибка: ' + (r.description||'неизвестно'), '', true);
-      }
-    })
-    .catch(function(e){
-      toast('Ошибка сети: '+e.message, '', true);
-    });
-  } else {
-    // Демо в браузере
+  data.user_id = userId || 0;
+
+  fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'ngrok-skip-browser-warning': '1'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(r){
+    if (r && r.ok) {
+      // успех — ничего не делаем, бот ответит в Telegram
+    } else {
+      // fallback демо
+      if (demoCallback) demoCallback();
+    }
+  })
+  .catch(function(e){
+    // нет связи — демо режим
     if (demoCallback) demoCallback();
-  }
+  });
 }
 
 function toggleShift() {
