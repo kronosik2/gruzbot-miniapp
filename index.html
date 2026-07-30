@@ -171,6 +171,11 @@ input[type=time]::-webkit-calendar-picker-indicator{filter:invert(.4);}
     <div style="font-size:10px;font-weight:700;color:#B58A14;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;">Кошелёк</div>
     <div style="font-size:32px;font-weight:800;color:#FFC107;" id="pbal">0 ₽</div>
     <div style="font-size:11px;color:#7A6A32;margin-top:3px;">Для оплаты публикаций и смен</div>
+    <div style="margin-top:12px;display:flex;gap:8px;align-items:center;">
+      <input id="topup-amount" type="number" inputmode="numeric" placeholder="Сумма ₽" style="flex:1;background:#121216;border:1px solid #3A2E00;border-radius:10px;padding:10px 12px;font-size:14px;font-weight:700;color:#F4F4F7;">
+      <button onclick="topUp()" style="border:0;border-radius:10px;padding:10px 16px;background:linear-gradient(135deg,#FFC831,#FFB000);color:#16161A;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap;">+ Пополнить</button>
+    </div>
+    <div style="font-size:10px;color:#5A5A64;margin-top:6px;">Демо-режим — реальных списаний нет</div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
     <div class="sbox">
@@ -466,6 +471,23 @@ function renderProfile() {
   document.getElementById('prw').textContent    = profile.ow;
   document.getElementById('prc-r').textContent  = '⭐ '+profile.rc.toFixed(1);
   document.getElementById('prw-r').textContent  = '⭐ '+profile.rw.toFixed(1);
+}
+
+function topUp() {
+  var amount = Number(document.getElementById('topup-amount').value);
+  if (!amount || amount < 1) {
+    toast('Введите сумму', 'Например: 500', true);
+    return;
+  }
+  var tg = window.Telegram && window.Telegram.WebApp;
+  if (tg && tg.initData) {
+    tg.sendData(JSON.stringify({action:'top_up', amount:amount}));
+  } else {
+    profile.balance += amount;
+    document.getElementById('pbal').textContent = fmt(profile.balance)+' ₽';
+    document.getElementById('topup-amount').value = '';
+    toast('Пополнено на '+fmt(amount)+' ₽ (демо)', 'Баланс обновлён');
+  }
 }
 
 function fmt(n) { return new Intl.NumberFormat('ru-RU').format(n); }
