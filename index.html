@@ -363,35 +363,81 @@ function submitOrder() {
       pay_mode:     payMethod
     };
 
-    var tg = window.Telegram && window.Telegram.WebApp;
-    if (tg && tg.initData) {
-      tg.sendData(JSON.stringify(order));
-    } else {
-      var payLabel = payType==='hourly' ? fmt(payment)+' ₽/час' : fmt(payment)+' ₽';
-      myOrders.unshift({id:Math.floor(100000+Math.random()*900000),title:title,addr:addr,dt:dtStr,pay:payLabel,status:'open'});
-      renderMOL();
-      gt('status');
-      toast('Заказ создан (демо)!', 'В Telegram данные уйдут боту');
-    }
+    sendToBotOrDemo(order,
+      // демо-колбэк
+      function() {
+        var payLabel = payType==='hourly' ? fmt(payment)+' ₽/час' : fmt(payment)+' ₽';
+        myOrders.unshift({id:Math.floor(100000+Math.random()*900000),title:title,addr:addr,dt:dtStr,pay:payLabel,status:'open'});
+        renderMOL();
+        gt('status');
+        toast('Заказ создан (демо)!', 'В Telegram данные уйдут боту');
+      }
+    );
   } catch(e) {
-    toast('Ошибка: '+e.message, 'Сообщи разработчику', true);
+    toast('Ошибка JS: '+e.message, '', true);
   }
 }
 
-// ── СМЕНА ──
-function toggleShift() {
+// ── ОТПРАВКА БОТУ ──
+function sendToBotOrDemo(data, demoCallback) {
   var tg = window.Telegram && window.Telegram.WebApp;
-  if (!onShift) {
-    if (tg && tg.initData) {
-      tg.sendData(JSON.stringify({action:'pay_shift'}));
-    } else {
-      onShift = true;
-      renderShift();
-      toast('Смена активирована (демо)!', 'До 00:00 сегодня');
+  var hasTg = !!(tg && tg.sendData);
+  // Проверяем что мы внутри Telegram (не в браузере)
+  var isInTg = hasTg && (window.location.href.indexOf('tgWebApp') !== -1
+    || (tg.initData && tg.initData.length > 0)
+    || tg.platform !== 'unknown');
+
+  if (hasTg && isInTg) {
+    try {
+      tg.sendData(JSON.stringify(data));
+    } catch(e) {
+      toast('Ошибка отправки: '+e.message, '', true);
     }
   } else {
-    toast('Смена активна до 00:00', 'Смотри доступные заказы ниже');
+    // Демо в браузере
+    if (demoCallback) demoCallback();
   }
+}
+
+function toggleShift() {
+  if (!onShift) {
+    sendToBotOrDemo(
+      {action:'pay_shift'},
+      function() {
+        onShift = true;
+        renderShift();
+        toast('Смена активирована (демо)!', 'До 00:00 сегодня');
+      }
+    );
+  } else {
+    toast('Смена активна до 00:00', 'Смотри заказы ниже');
+  }
+}
+
+function topUp() {
+  var amount = Number(document.getElementById('topup-amount').value);
+  if (!amount || amount < 1) {
+    toast('Введите сумму', 'Например: 500', true);
+    return;
+  }
+  sendToBotOrDemo(
+    {action:'top_up', amount:amount},
+    function() {
+      profile.balance += amount;
+      document.getElementById('pbal').textContent = fmt(profile.balance)+' ₽';
+      document.getElementById('topup-amount').value = '';
+      toast('Пополнено на '+fmt(amount)+' ₽ (демо)', 'Баланс обновлён');
+    }
+  );
+}
+
+function respondOrder(id) {
+  sendToBotOrDemo(
+    {action:'respond_order', order_id:id},
+    function() {
+      toast('Отклик отправлен (демо)!', 'Заказчик получит уведомление');
+    }
+  );
 }
 
 function renderShift() {
@@ -432,15 +478,6 @@ function renderOrders() {
   }).join('');
 }
 
-function respondOrder(id) {
-  var tg = window.Telegram && window.Telegram.WebApp;
-  if (tg && tg.initData) {
-    tg.sendData(JSON.stringify({action:'respond_order', order_id:id}));
-  } else {
-    toast('Отклик отправлен (демо)!', 'Заказчик получит уведомление');
-  }
-}
-
 // ── МОИ ЗАКАЗЫ ──
 function renderMOL() {
   var el = document.getElementById('mol');
@@ -473,22 +510,6 @@ function renderProfile() {
   document.getElementById('prw-r').textContent  = '⭐ '+profile.rw.toFixed(1);
 }
 
-function topUp() {
-  var amount = Number(document.getElementById('topup-amount').value);
-  if (!amount || amount < 1) {
-    toast('Введите сумму', 'Например: 500', true);
-    return;
-  }
-  var tg = window.Telegram && window.Telegram.WebApp;
-  if (tg && tg.initData) {
-    tg.sendData(JSON.stringify({action:'top_up', amount:amount}));
-  } else {
-    profile.balance += amount;
-    document.getElementById('pbal').textContent = fmt(profile.balance)+' ₽';
-    document.getElementById('topup-amount').value = '';
-    toast('Пополнено на '+fmt(amount)+' ₽ (демо)', 'Баланс обновлён');
-  }
-}
 
 function fmt(n) { return new Intl.NumberFormat('ru-RU').format(n); }
 
