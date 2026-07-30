@@ -225,6 +225,7 @@ var myOrders=[], demoOrders=[
   {id:101,title:'Переезд квартиры',addr:'ул. Гагарина, 12',dt:'Сегодня 14:00',pay:'500 ₽/час',w:2},
   {id:102,title:'Погрузка коробок',addr:'пр. Победы, 45',dt:'Завтра 09:00',pay:'2 000 ₽',w:1},
 ];
+var CURRENT_USER_ID = 0;
 
 window.addEventListener('DOMContentLoaded', function() {
   try {
@@ -234,11 +235,12 @@ window.addEventListener('DOMContentLoaded', function() {
       tg.expand();
       var u = tg.initDataUnsafe && tg.initDataUnsafe.user;
       if (u) {
+        CURRENT_USER_ID = u.id;
         profile.name  = (u.first_name||'') + (u.last_name ? ' '+u.last_name : '');
         profile.phone = u.username ? '@'+u.username : '';
       }
     }
-  } catch(e) {}
+  } catch(e) { console.error('TG init error:', e); }
 
   var now=new Date(), tom=new Date(now.getTime()+86400000);
   var pad=function(v){return String(v).padStart(2,'0');};
@@ -364,14 +366,14 @@ function submitOrder() {
     };
 
     sendToBotOrDemo(order,
-      // демо-колбэк
       function() {
         var payLabel = payType==='hourly' ? fmt(payment)+' ₽/час' : fmt(payment)+' ₽';
         myOrders.unshift({id:Math.floor(100000+Math.random()*900000),title:title,addr:addr,dt:dtStr,pay:payLabel,status:'open'});
         renderMOL();
         gt('status');
         toast('Заказ создан (демо)!', 'В Telegram данные уйдут боту');
-      }
+      },
+      '✅ Заказ опубликован!'
     );
   } catch(e) {
     toast('Ошибка JS: '+e.message, '', true);
@@ -381,33 +383,35 @@ function submitOrder() {
 // ── ОТПРАВКА БОТУ через ngrok ──
 var API_URL = 'https://quarters-semisweet-cut.ngrok-free.dev/miniapp';
 
-function sendToBotOrDemo(data, demoCallback) {
-  var tg = window.Telegram && window.Telegram.WebApp;
-  var userId = tg && tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.id;
+function sendToBotOrDemo(data, demoCallback, successMsg) {
+  data.user_id = CURRENT_USER_ID;
 
-  data.user_id = userId || 0;
-
-  fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'ngrok-skip-browser-warning': '1'
-    },
-    body: JSON.stringify(data)
-  })
-  .then(function(r){ return r.json(); })
-  .then(function(r){
-    if (r && r.ok) {
-      // успех — ничего не делаем, бот ответит в Telegram
-    } else {
-      // fallback демо
+  if (CURRENT_USER_ID > 0) {
+    fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': '1'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(r){
+      if (r && r.ok) {
+        if (successMsg) toast(successMsg, 'Ответ придёт в Telegram');
+      } else {
+        toast('Ошибка: '+(r.error||'неизвестно'), '', true);
+        if (demoCallback) demoCallback();
+      }
+    })
+    .catch(function(e){
+      toast('Нет связи с сервером', e.message, true);
       if (demoCallback) demoCallback();
-    }
-  })
-  .catch(function(e){
-    // нет связи — демо режим
+    });
+  } else {
+    // Браузер без Telegram — демо режим
     if (demoCallback) demoCallback();
-  });
+  }
 }
 
 function toggleShift() {
@@ -418,7 +422,8 @@ function toggleShift() {
         onShift = true;
         renderShift();
         toast('Смена активирована (демо)!', 'До 00:00 сегодня');
-      }
+      },
+      '✅ Смена активирована!'
     );
   } else {
     toast('Смена активна до 00:00', 'Смотри заказы ниже');
@@ -438,7 +443,8 @@ function topUp() {
       document.getElementById('pbal').textContent = fmt(profile.balance)+' ₽';
       document.getElementById('topup-amount').value = '';
       toast('Пополнено на '+fmt(amount)+' ₽ (демо)', 'Баланс обновлён');
-    }
+    },
+    '✅ Кошелёк пополнен на '+amount+' ₽'
   );
 }
 
